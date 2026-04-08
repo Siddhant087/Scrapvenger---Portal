@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrapvenger ELV Expense Portal</title>
+<style>
+body { font-family: Arial; background:#f2f2f2; text-align:center; }
+.container { background:white; padding:20px; margin:20px auto; width:300px; border-radius:10px; box-shadow:0 0 10px gray; }
+input, button { width:90%; padding:10px; margin:5px; }
+button { background:green; color:white; border:none; cursor:pointer; }
+ul { list-style:none; padding:0; }
+</style>
+</head>
+
+<body>
+
+<h2>Scrapvenger ELV Expense Portal</h2>
+
+<div class="container" id="loginBox">
+<h3>Login</h3>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+
+<div class="container" id="mainBox" style="display:none;">
+<h3>Add Expense</h3>
+<input id="name" placeholder="Employee Name">
+<input id="amount" placeholder="Amount">
+<button onclick="addExpense()">Add Expense</button>
+
+<h3>Expense List</h3>
+<ul id="list"></ul>
+</div>
+
+<script>
+let users = {
+"admin@scrapvenger":"scrapvenger@2705",
+"emp1":"1234","emp2":"1234","emp3":"1234",
+"emp4":"1234","emp5":"1234","emp6":"1234",
+"emp7":"1234","emp8":"1234","emp9":"1234","emp10":"1234"
+};
+
+function login(){
+let u = document.getElementById("user").value;
+let p = document.getElementById("pass").value;
+
+if(users[u] && users[u]==p){
+alert("Login Success");
+document.getElementById("loginBox").style.display="none";
+document.getElementById("mainBox").style.display="block";
+}else{
+alert("Wrong Username or Password");
+}
+}
+
+let data = [];
+
+function addExpense(){
+let n = document.getElementById("name").value;
+let a = document.getElementById("amount").value;
+
+if(n=="" || a==""){
+alert("Fill all fields");
+return;
+}
+
+data.push({name:n, amount:a});
+showData();
+}
+
+function showData(){
+let list = document.getElementById("list");
+list.innerHTML="";
+
+data.forEach(d=>{
+list.innerHTML += `<li>${d.name} - ₹${d.amount}</li>`;
+});
+}
+</script>
+
+</body>
+</html>
